@@ -10,6 +10,7 @@
   color: vars.$mainColor;
   // on veut remonter le bouton pour qu'il soit sur le Header
   margin-top: -25px;
+  transition: 1s;
 
   // au hover on inverse les couleurs
   &:hover {
@@ -21,5 +22,6 @@
   // .toggle.toggle--open
   &.toggle--open {
     transform: rotate(45deg);
+    transition: 1s;
   }
 }
