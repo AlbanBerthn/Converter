@@ -1,0 +1,42 @@
+@use 'src/styles/vars';
+
+.currencies {
+  text-align: left;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: vars.$lightColor;
+
+  &-search {
+    padding: vars.$gutter;
+    border: none;
+    width: 100%;
+    color: vars.$mainColor;
+    font-size: 1.2em;
+
+    &::placeholder {
+      color: vars.$altColor;
+    }
+  }
+
+  // Transition CSS :
+  // quand la propriété CSS indiquée change, la nouvelle valeur est prise
+  // en compte progressivement
+  .currency {
+    border-top: 1px solid vars.$altColor;
+    padding: vars.$gutter;
+    font-weight: vars.$fwMedium;
+    cursor: pointer;
+    // Transition appliquée lorsque la souris quitte l'element
+    // Pour une transition : on renseigne la propriété CSS sur laquelle appliquer la transition
+    // ainsi que sa durée
+    transition: background-color vars.$slowTransition;
+
+    &:hover {
+      background-color: vars.$altColor;
+      // Transition appliquée lorsque la souris survole l'element
+      // Pour une transition : on renseigne la propriété CSS sur laquelle appliquer la transition
+      // ainsi que sa durée
+      transition: background-color vars.$fastTransition;
+    }
+  }
+}
