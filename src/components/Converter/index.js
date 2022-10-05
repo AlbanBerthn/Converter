@@ -165,6 +165,9 @@ class Converter extends React.Component {
     // On recup la liste des devises filtrées par raport à l'entrée utilisateur
     // contenu dans le state
     // Maintenant, on va envoyer cette liste filtrée au composant <Currencies />
+    // Grace a la propriété isOpen contenu dans notre state et a notre composant Toggle,
+    // la valeur de cette propriété changera a chaque click de l'utilisateur
+    // on affichera (ou non) les monnais disponible dans notre convertisseur au gré du chagment de valeur ( vrai ou faux) de cette propriété.
     const filteredCurrencies = this.getFilteredCurrencies();
     return (
       <div className='converter'>
