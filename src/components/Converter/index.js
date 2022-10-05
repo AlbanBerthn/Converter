@@ -7,6 +7,7 @@ import currenciesList from '../../data/currencies';
 // Composant
 import Header from '../Header';
 import Currencies from '../Currencies';
+import Amount from '../Amount';
 // Style
 import './converter.scss';
 
@@ -31,7 +32,7 @@ class Converter extends React.Component {
     this.state = {
       isOpen: false,
       baseAmount: 1,
-      currency: 'United State Dollar',
+      currency: 'United States Dollar',
       search: '',
     };
   }
@@ -46,6 +47,13 @@ class Converter extends React.Component {
       const { currency } = this.state;
       document.title = currency;
     }
+
+  // appelé juste après chaque rendu du composant, sauf le premier
+  componentDidUpdate() {
+    console.log('componentDidUpdate : Execution à chaque re-rendu');
+    const { currency } = this.state;
+    document.title = currency;
+  }
 
   handleCurrencyClick(name) {
     // Le but ici est de venir modifier la valeur de la propriété currency du state
@@ -97,6 +105,25 @@ class Converter extends React.Component {
 
     return filteredCurrencies;
   }
+
+  // Fonction qui retourne le resultat de conversion
+  makeConversion() {
+    // On recup les données depuis notre state
+    const { baseAmount, currency } = this.state;
+    // On recup les infos de la devise choisie
+    const currencyData = currenciesList.find((item) => item.name === currency);
+    // On extrait le taux de conversion
+    console.log(currencyData);
+    // console.log(currenciesList);
+    const { rate } = currencyData;
+    // On fait la conversion
+    const result = baseAmount * rate;
+    // On limite à 2 décimales
+    const formattedResult = Math.round(result * 100) / 100;
+
+    return formattedResult;
+  }
+
   // Pour lire une propriété du State il faut faire :
   // this.state.isOpen (par exemple)
   // => on adapte donc l'affichage conditionnel en ce basant sur notre State
@@ -109,6 +136,10 @@ class Converter extends React.Component {
       currency,
       search,
     } = this.state;
+
+    // On recup le resultat de conversion
+    // Pour l'envoyer au composant qui doit l'afficher
+    const result = this.makeConversion();
 
     // On recup la liste des devises filtrées par raport à l'entrée utilisateur
     // contenu dans le state
@@ -123,6 +154,7 @@ class Converter extends React.Component {
           searchValue={search}
           setSearch={this.handleChangeSearch}
           />
+        <Amount currency={currency} value={result} />
         <p>Hello World</p>
       </div>
     );

@@ -1,0 +1,17 @@
+@use 'src/styles/vars';
+
+.amount {
+  padding: vars.$gutter * 2;
+  background-color: vars.$mainColor;
+  color: vars.$lightColor;
+
+  &-value {
+    font-weight: vars.$fwBold;
+    font-size: 2em;
+  }
+
+  &-currency {
+    font-size: 1.3em;
+    margin-top: vars.$gutter;
+  }
+}
