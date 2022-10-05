@@ -1,0 +1,18 @@
+// Import de notre module Scss: celui qui contient nos variables
+@use 'src/styles/vars';
+
+.header {
+  // on utilise nos variable pour appliquer nos styles
+  background-color: vars.$mainColor;
+  color: vars.$lightColor;
+  padding: 2 * vars.$gutter;
+
+  &-title {
+    font-weight: vars.$fwBold;
+    font-size: 2em;
+  }
+
+  &-amount{
+    margin-top: vars.$gutter;
+  }
+}
