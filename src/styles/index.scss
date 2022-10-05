@@ -1,0 +1,9 @@
+@use 'reset';
+@use 'vars';
+
+body{
+  font-family: vars.$font;
+  font-weight: vars.$fwLight;
+  background-color: vars.$altColor;
+  color: vars.$mainColor;
+}
