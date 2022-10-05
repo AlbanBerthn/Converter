@@ -8,6 +8,7 @@ import currenciesList from '../../data/currencies';
 import Header from '../Header';
 import Currencies from '../Currencies';
 import Amount from '../Amount';
+import Toggle from '../Toggle';
 // Style
 import './converter.scss';
 
@@ -26,6 +27,7 @@ class Converter extends React.Component {
     // On vient améliorer notre handler en forcant le context du this
     // Ainsi, on s'assure que même en dehors de son context de base (le nouvel objet Converter),
     // le mot clé this y fera quand même reference
+    this.handleClick = this.handleClick.bind(this);
     this.handleCurrencyClick = this.handleCurrencyClick.bind(this);
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
     // On créer notre State
@@ -46,6 +48,16 @@ class Converter extends React.Component {
       // console.log('componentDidMount : Execution lors du premier rendu');
       const { currency } = this.state;
       document.title = currency;
+
+      // Cette ecouteur d'evenement permet de fermer le Toogle en appuyant 
+      // sur la touche Echap du clavier
+      document.addEventListener('keyup', (evt) => {
+        if (evt.key === 'Escape') {
+          this.setState({
+            isOpen: false,
+          });
+        }
+      });
     }
 
   // appelé juste après chaque rendu du composant, sauf le premier
@@ -124,6 +136,15 @@ class Converter extends React.Component {
     return formattedResult;
   }
 
+  handleClick() {
+    const { isOpen } = this.state;
+
+    // On fournit un objet qui décrit les modification à appliquer au state
+    this.setState({
+      isOpen: !isOpen,
+    });
+  }
+
   // Pour lire une propriété du State il faut faire :
   // this.state.isOpen (par exemple)
   // => on adapte donc l'affichage conditionnel en ce basant sur notre State
@@ -148,12 +169,16 @@ class Converter extends React.Component {
     return (
       <div className='converter'>
         <Header baseAmount={baseAmount} />
-        <Currencies
-          currencies= {filteredCurrencies}
-          handleClick={this.handleCurrencyClick}
-          searchValue={search}
-          setSearch={this.handleChangeSearch}
-          />
+        <Toggle open={isOpen} manageClick={this.handleClick} />
+        {isOpen && (
+           <Currencies
+           currencies= {filteredCurrencies}
+           handleClick={this.handleCurrencyClick}
+           searchValue={search}
+           setSearch={this.handleChangeSearch}
+           />
+        )}
+       
         <Amount currency={currency} value={result} />
         <p>Hello World</p>
       </div>
