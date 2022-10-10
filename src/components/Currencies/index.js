@@ -40,7 +40,6 @@ function Currencies({
   // - Avoir une case dans le state qui va contenir la valeur de l'input
   // - Controle en lecture : Afficher la valeur du state dans l'input
   // - Controle en ecriture : Modifier la valeur dans le state
-  // Cf. le shcéma : https://excalidraw.com/#json=fvoLl94jSBC8Q7kMjM-Yi,1kzJKoP1HiUR0F3mApmcmw
 
   /*
   key : identifiant unique pour des éléments qui sont du même type (balises

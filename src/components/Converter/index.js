@@ -183,7 +183,6 @@ class Converter extends React.Component {
         )}
        
         <Amount currency={currency} value={result} />
-        <p>Hello World</p>
       </div>
     );
   }
